@@ -1,0 +1,16 @@
+
+{	
+"files.associations": {
+	"get_next_line.h": "c",
+	"errno.h": "c",
+	"get_next_line_bonus.h": "c",
+	"utils.h": "c",
+	"locale": "cpp",
+	"istream": "c",
+	"ft_printf.h": "c"
+},
+    "editor.insertSpaces": false,
+	"editor.detectIndentation": false,
+	"codam-norminette-3.displayErrorName": true,
+	"C_Cpp.default.configurationProvider": "ms-vscode.makefile-tools"
+}
