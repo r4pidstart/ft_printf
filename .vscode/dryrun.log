@@ -1,6 +1,0 @@
-make --dry-run --keep-going --print-directory
-make: Entering directory `/Users/jotaesik/ft_printf'
-clang -Wall -Wextra -Werror -g3 -ggdb \
-	-o test
-make: Leaving directory `/Users/jotaesik/ft_printf'
- 
