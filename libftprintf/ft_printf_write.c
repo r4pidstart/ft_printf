@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 00:53:23 by tjo               #+#    #+#             */
-/*   Updated: 2022/07/25 22:54:39 by tjo              ###   ########.fr       */
+/*   Updated: 2022/07/25 23:16:14 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,19 @@ static int	write_argument(int flag, char *str)
 	int	ret;
 
 	ret = 0;
-	if (flag | (1 << 3) && flag | (1 << 7))
+	if (flag & (1 << 3) && flag & (1 << 7))
 		ret += write(1, "0X", 2);
-	else if (flag | (1 << 3))
+	else if (flag & (1 << 3))
 		ret += write(1, "0x", 2);
-	else if (flag | (1 << 4))
+	else if (flag & (1 << 4))
 		ret += write(1, "+", 1);
-	else if (flag | (1 << 5))
+	else if (flag & (1 << 5))
 		ret += write(1, " ", 1);
 	while (*str)
+	{
 		write(1, str++, 1);
+		ret++;
+	}
 	return (ret);
 }
 
@@ -55,15 +58,18 @@ int	write_result(int flag, char *str, int width)
 
 	ret = 0;
 	filler = ' ';
-	if (flag | (1 << 2))
+	if (flag & (1 << 2))
 		filler = '0';
 	fill_size = width - ft_strlen(str);
-	fill_size -= (2 * (flag | (1 << 3)));
-	fill_size -= (1 * ((flag | (1 << 4)) || (flag | (1 << 5))));
-	if (!(flag | (1 << 1)))
+	fill_size -= (2 * (flag & (1 << 3)));
+	fill_size -= (1 * ((flag & (1 << 4)) || (flag & (1 << 5))));
+	if (!(flag & (1 << 1)))
 	{
-		while (fill_size--)
+		while (fill_size)
+		{
 			ret += write(1, &filler, 1);
+			fill_size--;
+		}	
 	}
 	ret += write_argument(flag, str);
 	while (fill_size--)

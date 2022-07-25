@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 00:38:49 by tjo               #+#    #+#             */
-/*   Updated: 2022/07/25 22:54:04 by tjo              ###   ########.fr       */
+/*   Updated: 2022/07/25 23:39:56 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	print_char(int flag, int width, va_list *vl)
 	tmp = (char *)malloc(sizeof(char) * 2);
 	tmp[0] = va_arg(*vl, int);
 	tmp[1] = '\0';
-	return (write_result(flag & 1, tmp, width));
+	return (write_result(flag & 1 << 1, tmp, __max(1, width)));
 }
 
 int	print_string(int flag, int width, va_list *vl)
@@ -36,11 +36,11 @@ int	print_pointer(int flag, int width, int precision, va_list *vl)
 
 	num = va_arg(*vl, size_t);
 	len = get_length_ul(16, num);
-	tmp = (char *)malloc(sizeof(char) * __max(len, precision) + 1);
+	tmp = (char *)malloc(sizeof(char) * __max(len, width) + 1);
 	if (!tmp)
 		return (0);
-	custom_atoi_hex(flag, tmp, __max(len, precision), num);
-	return (write_result((flag | (1 << 3)), tmp, width));
+	custom_atoi_hex(flag, tmp, __max(len, width), num);
+	return (write_result((flag | (1 << 3)), tmp, max__(len, width));
 }
 
 int	print_dec(int flag, int width, int precision, va_list *vl)
@@ -55,8 +55,8 @@ int	print_dec(int flag, int width, int precision, va_list *vl)
 	else
 		len = get_length(10, num);
 	tmp = (char *)malloc(sizeof(char) * __max(len, precision) + 1);
-	custom_atoi_dec(tmp, __max(len, precision), num);
-	return (write_result(flag & (1 << 2), tmp, width));
+	custom_atoi_dec(tmp, __max(len, width), num);
+	return (write_result(flag & (1 << 2), tmp, __max(len, width)));
 }
 
 int	print_hex(int flag, int width, int precision, va_list *vl)

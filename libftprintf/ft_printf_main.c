@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 21:56:30 by tjo               #+#    #+#             */
-/*   Updated: 2022/07/25 22:45:02 by tjo              ###   ########.fr       */
+/*   Updated: 2022/07/25 23:25:42 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,25 +44,27 @@ int	ft_printf(const char *str, ...)
 	va_list	vl;
 	char	*cur;
 	int		ret;
+	int		cnt;
 
 	va_start(vl, str);
+	cnt = 0;
 	cur = (char *)str;
 	while (*cur)
 	{
 		if (*cur == '%')
 		{
-			ret = parse_argument(cur++, &vl);
-			if (!ret)
-				return (0);
-			cur += ret;
+			ret = parse_argument(++cur, &vl);
+			cnt += ret;
+			cur++;
 		}
 		else
 		{
 			ret = write(1, cur++, 1);
-			if (!ret)
-				return (0);
+			cnt++;
 		}
+		if (!ret)
+			return (0);
 	}
 	va_end(vl);
-	return (ret);
+	return (cnt);
 }
