@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 00:53:23 by tjo               #+#    #+#             */
-/*   Updated: 2022/07/26 00:06:42 by tjo              ###   ########.fr       */
+/*   Updated: 2022/07/26 00:26:24 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 // 5 -> ' '
 // 8 -> do not free
 
-static int	write_argument(int flag, char *str)
+static int	write_argument(int flag, char *str, int width)
 {
 	int	ret;
 
@@ -32,7 +32,7 @@ static int	write_argument(int flag, char *str)
 		ret += write(1, "+", 1);
 	else if (flag & (1 << 5))
 		ret += write(1, " ", 1);
-	while (*str)
+	while (width--)
 	{
 		write(1, str++, 1);
 		ret++;
@@ -50,7 +50,8 @@ int	write_result(int flag, char *str, int width)
 	filler = ' ';
 	if (flag & (1 << 2))
 		filler = '0';
-	fill_size = width - ft_strlen(str);
+	fill_size = 0;
+	// fill_size = width - ft_strlen(str);
 	// fill_size -= (2 * !!(flag & (1 << 3)));
 	// fill_size -= !!((flag & (1 << 4)) || (flag & (1 << 5)));
 	if (!(flag & (1 << 1)))
@@ -61,7 +62,7 @@ int	write_result(int flag, char *str, int width)
 			fill_size--;
 		}	
 	}
-	ret += write_argument(flag, str);
+	ret += write_argument(flag, str, width);
 	while (fill_size--)
 		ret += write(1, &filler, 1);
 	if (!(flag & (1 << 8)))

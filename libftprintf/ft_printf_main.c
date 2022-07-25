@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 21:56:30 by tjo               #+#    #+#             */
-/*   Updated: 2022/07/25 23:42:51 by tjo              ###   ########.fr       */
+/*   Updated: 2022/07/26 00:18:07 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ int	ft_printf(const char *str, ...)
 		{
 			ret = write(1, cur++, 1);
 			cnt++;
+			if (!ret)
+				return (0);
 		}
-		if (!ret)
-			return (0);
 	}
 	va_end(vl);
 	return (cnt);

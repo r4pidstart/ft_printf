@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 01:12:41 by tjo               #+#    #+#             */
-/*   Updated: 2022/07/26 00:07:15 by tjo              ###   ########.fr       */
+/*   Updated: 2022/07/26 00:43:05 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,15 +67,25 @@ int	get_length_ul(int base, size_t n)
 
 void	custom_atoi_dec(char *tmp, int len, long long num)
 {
-	long long	origin_num;
-
-	origin_num = num;
 	tmp[len] = '\0';
 	while (len--)
 	{
-		if (!len && origin_num < 0)
-			tmp[len] = '-';
-		else if (!num)
+		if (!num)
+			tmp[len] = '0';
+		else
+		{
+			tmp[len] = num % 10 + '0';
+			num /= 10;
+		}
+	}
+}
+
+void	custom_atoi_udec(char *tmp, int len, unsigned int num)
+{
+	tmp[len] = '\0';
+	while (len--)
+	{
+		if (!num)
 			tmp[len] = '0';
 		else
 		{

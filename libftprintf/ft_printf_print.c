@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 00:38:49 by tjo               #+#    #+#             */
-/*   Updated: 2022/07/26 00:08:32 by tjo              ###   ########.fr       */
+/*   Updated: 2022/07/26 00:43:14 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	print_char(int flag, int width, va_list *vl)
 	tmp = (char *)malloc(sizeof(char) * 2);
 	tmp[0] = va_arg(*vl, int);
 	tmp[1] = '\0';
-	return (write_result(flag & 1 << 1, tmp, __max(1, width)));
+	return (write_result(flag & 1 << 1, tmp, __max(width, 1)));
 }
 
 int	print_string(int flag, int width, va_list *vl)
@@ -27,6 +27,8 @@ int	print_string(int flag, int width, va_list *vl)
 	char	*tmp;
 
 	tmp = va_arg(*vl, char *);
+	if (!tmp)
+		tmp = "(null)";
 	return (write_result((flag & 1 << 1) | (1 << 8), \
 	tmp, __max(ft_strlen(tmp), width)));
 }
@@ -50,15 +52,27 @@ int	print_dec(int flag, int width, int precision, va_list *vl)
 {
 	char		*tmp;
 	int			len;
+	int			mi;
 	long long	num;
 
 	num = va_arg(*vl, int);
+	mi = 0;
+	if (!(flag & (1 << 7)) && num < 0)
+	{
+		mi = 1;
+		num = -num;
+	}
 	if (flag & (1 << 7))
-		len = __max(__max(get_length_ul(10, (size_t)num), precision), width);
+		len = __max(__max(get_length_ul(10, (unsigned int)num) + mi, precision), width);
 	else
-		len = __max(__max(get_length(10, num), precision), width);
-	tmp = (char *)malloc(sizeof(char) * len + 1);
-	custom_atoi_dec(tmp, len, num);
+		len = __max(__max(get_length(10, num) + mi, precision), width);
+	tmp = (char *)malloc(sizeof(char) * len + 1 + mi);
+	if (flag & (1 << 7))
+		custom_atoi_udec(tmp, (unsigned int)len, num);
+	else
+		custom_atoi_dec(tmp, len, num);
+	if (mi)
+		tmp[0] = '-';
 	return (write_result(flag & (1 << 2), tmp, len));
 }
 
