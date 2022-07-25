@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 21:56:30 by tjo               #+#    #+#             */
-/*   Updated: 2022/07/25 23:25:42 by tjo              ###   ########.fr       */
+/*   Updated: 2022/07/25 23:42:51 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	parse_argument(char *c, va_list *vl)
 	else if (*c == 's')
 		return (print_string(flag, width, vl));
 	else if (*c == 'p')
-		return (print_pointer(flag, width, precision, vl));
+		return (print_pointer(flag, width, vl));
 	else if (*c == 'd' || *c == 'i' || *c == 'u')
 		return (print_dec(flag | (*c == 'u') << 7, width, precision, vl));
 	else if (*c == 'x' || *c == 'X')
