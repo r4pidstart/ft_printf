@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 00:53:23 by tjo               #+#    #+#             */
-/*   Updated: 2022/07/25 23:53:12 by tjo              ###   ########.fr       */
+/*   Updated: 2022/07/26 00:06:42 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,6 @@
 // 4 -> '+'
 // 5 -> ' '
 // 8 -> do not free
-
-static size_t	ft_strlen(const char *s)
-{
-	size_t	n;
-
-	n = 0;
-	while (s[n])
-		n++;
-	return (n);
-}
 
 static int	write_argument(int flag, char *str)
 {

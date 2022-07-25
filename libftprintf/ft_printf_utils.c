@@ -6,11 +6,21 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 01:12:41 by tjo               #+#    #+#             */
-/*   Updated: 2022/07/25 22:49:24 by tjo              ###   ########.fr       */
+/*   Updated: 2022/07/26 00:07:15 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"ft_printf.h"
+
+size_t	ft_strlen(const char *s)
+{
+	size_t	n;
+
+	n = 0;
+	while (s[n])
+		n++;
+	return (n);
+}
 
 int	__max(int a, int b)
 {

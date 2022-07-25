@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 00:38:49 by tjo               #+#    #+#             */
-/*   Updated: 2022/07/25 23:58:59 by tjo              ###   ########.fr       */
+/*   Updated: 2022/07/26 00:08:32 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,11 @@ int	print_char(int flag, int width, va_list *vl)
 
 int	print_string(int flag, int width, va_list *vl)
 {
+	char	*tmp;
+
+	tmp = va_arg(*vl, char *);
 	return (write_result((flag & 1 << 1) | (1 << 8), \
-	va_arg(*vl, char *), width));
+	tmp, __max(ft_strlen(tmp), width)));
 }
 
 int	print_pointer(int flag, int width, va_list *vl)

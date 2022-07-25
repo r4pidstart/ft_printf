@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 21:55:51 by tjo               #+#    #+#             */
-/*   Updated: 2022/07/25 23:43:10 by tjo              ###   ########.fr       */
+/*   Updated: 2022/07/26 00:07:24 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int		print_hex(int flag, int width, int precision, va_list *vl);
 
 /* ft_printf_utils.c */
 int		__max(int a, int b);
+size_t	ft_strlen(const char *s);
 int		get_length(int base, long long n);
 int		get_length_ul(int base, size_t n);
 void	custom_atoi_dec(char *tmp, int len, long long n);
