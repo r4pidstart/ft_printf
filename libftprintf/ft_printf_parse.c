@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 00:12:47 by tjo               #+#    #+#             */
-/*   Updated: 2022/06/06 02:31:46 by tjo              ###   ########.fr       */
+/*   Updated: 2022/07/25 22:37:16 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	ft_custom_atoi(char **c)
 	{
 		if (**c == '-')
 			sign = -1;
-		*c++;
+		(*c)++;
 	}
 	while ('0' <= **c && **c <= '9')
 		ret = ret * 10 + (*(*c++) - 0);
@@ -36,16 +36,16 @@ int	parse_precision(char **c, int *precision, va_list *vl)
 
 	*precision = 0;
 	if (**c == '.')
-		ret = 6;
+		ret = 1 << 6;
 	else
 		ret = 0;
 	if (ret)
 	{
-		*c++;
+		(*c)++;
 		if (**c == '*')
 		{
 			*precision = va_arg(*vl, int);
-			*c++;
+			(*c)++;
 		}
 		else
 			*precision = ft_custom_atoi(c);
@@ -59,9 +59,9 @@ int	parse_flag2(char **c, int *width, va_list *vl)
 
 	*width = 0;
 	if (**c == '-')
-		ret = 1;
+		ret = 1 << 1;
 	else if (**c == '0')
-		ret = 2;
+		ret = 1 << 2;
 	else
 		ret = 0;
 	if (ret)
@@ -69,7 +69,7 @@ int	parse_flag2(char **c, int *width, va_list *vl)
 	if (**c == '*')
 	{
 		*width = va_arg(*vl, int);
-		*c++;
+		(*c)++;
 	}
 	else
 		*width = ft_custom_atoi(c);
@@ -81,11 +81,11 @@ int	parse_flag1(char **c)
 	int	ret;
 
 	if (**c == '#')
-		ret = 3;
+		ret = 1 << 3;
 	else if (**c == '+')
-		ret = 4;
+		ret = 1 << 4;
 	else if (**c == ' ')
-		ret = 5;
+		ret = 1 << 5;
 	else
 		ret = 0;
 	if (ret)

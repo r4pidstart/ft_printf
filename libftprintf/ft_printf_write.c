@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 00:53:23 by tjo               #+#    #+#             */
-/*   Updated: 2022/06/06 02:46:02 by tjo              ###   ########.fr       */
+/*   Updated: 2022/07/25 22:54:39 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static int	write_argument(int flag, char *str)
 		ret += write(1, " ", 1);
 	while (*str)
 		write(1, str++, 1);
+	return (ret);
 }
 
 int	write_result(int flag, char *str, int width)

@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 01:12:41 by tjo               #+#    #+#             */
-/*   Updated: 2022/06/06 02:49:44 by tjo              ###   ########.fr       */
+/*   Updated: 2022/07/25 22:49:24 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	get_length_ul(int base, size_t n)
 	return (ret);
 }
 
-void	custom_atoi_dec(int flag, char *tmp, int len, long long num)
+void	custom_atoi_dec(char *tmp, int len, long long num)
 {
 	long long	origin_num;
 
@@ -73,7 +73,6 @@ void	custom_atoi_dec(int flag, char *tmp, int len, long long num)
 			num /= 10;
 		}
 	}
-	return (tmp);
 }
 
 void	custom_atoi_hex(int flag, char *tmp, int len, size_t num)
@@ -94,5 +93,4 @@ void	custom_atoi_hex(int flag, char *tmp, int len, size_t num)
 			num /= 16;
 		}
 	}
-	return (tmp);
 }

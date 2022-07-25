@@ -6,32 +6,32 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 00:38:49 by tjo               #+#    #+#             */
-/*   Updated: 2022/06/06 02:31:38 by tjo              ###   ########.fr       */
+/*   Updated: 2022/07/25 22:54:04 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"ft_printf.h"
 
-int	print_char(int flag, int width, int precision, va_list *vl)
+int	print_char(int flag, int width, va_list *vl)
 {
 	char	*tmp;
 
 	tmp = (char *)malloc(sizeof(char) * 2);
-	tmp[0] = va_arg(*vl, char);
+	tmp[0] = va_arg(*vl, int);
 	tmp[1] = '\0';
 	return (write_result(flag & 1, tmp, width));
 }
 
-int	print_string(int flag, int width, int precision, va_list *vl)
+int	print_string(int flag, int width, va_list *vl)
 {
-	return (write_result(flag & 1 | (1 << 8), va_arg(*vl, char *), width));
+	return (write_result((flag & 1 << 1) | (1 << 8), \
+	va_arg(*vl, char *), width));
 }
 
 int	print_pointer(int flag, int width, int precision, va_list *vl)
 {
 	char	*tmp;
 	int		len;
-	int		idx;
 	size_t	num;
 
 	num = va_arg(*vl, size_t);
@@ -47,7 +47,6 @@ int	print_dec(int flag, int width, int precision, va_list *vl)
 {
 	char		*tmp;
 	int			len;
-	int			idx;
 	long long	num;
 
 	num = va_arg(*vl, int);
@@ -56,15 +55,14 @@ int	print_dec(int flag, int width, int precision, va_list *vl)
 	else
 		len = get_length(10, num);
 	tmp = (char *)malloc(sizeof(char) * __max(len, precision) + 1);
-	custom_atoi_dec(flag, tmp, __max(len, precision), num);
-	return (write_result(flag & 3, tmp, width));
+	custom_atoi_dec(tmp, __max(len, precision), num);
+	return (write_result(flag & (1 << 2), tmp, width));
 }
 
 int	print_hex(int flag, int width, int precision, va_list *vl)
 {
 	char			*tmp;
 	int				len;
-	int				idx;
 	unsigned int	num;
 
 	num = va_arg(*vl, unsigned int);

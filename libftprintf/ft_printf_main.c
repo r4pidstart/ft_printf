@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 21:56:30 by tjo               #+#    #+#             */
-/*   Updated: 2022/06/06 18:34:24 by tjo              ###   ########.fr       */
+/*   Updated: 2022/07/25 22:45:02 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,14 @@ static int	parse_argument(char *c, va_list *vl)
 	int	width;
 	int	precision;
 
+	flag = 0;
 	flag ^= parse_flag1(&c);
 	flag ^= parse_flag2(&c, &width, vl);
 	flag ^= parse_precision(&c, &precision, vl);
 	if (*c == 'c')
-		return (print_char(flag, width, precision, vl));
+		return (print_char(flag, width, vl));
 	else if (*c == 's')
-		return (print_string(flag, width, precision, vl));
+		return (print_string(flag, width, vl));
 	else if (*c == 'p')
 		return (print_pointer(flag, width, precision, vl));
 	else if (*c == 'd' || *c == 'i' || *c == 'u')
@@ -33,7 +34,7 @@ static int	parse_argument(char *c, va_list *vl)
 	else if (*c == 'x' || *c == 'X')
 		return (print_hex(flag | (*c == 'X') << 7, width, precision, vl));
 	else if (*c == '%')
-		return (write(1, '%', 1));
+		return (write(1, "%", 1));
 	else
 		return (0);
 }
