@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 00:38:49 by tjo               #+#    #+#             */
-/*   Updated: 2022/07/28 20:08:10 by tjo              ###   ########.fr       */
+/*   Updated: 2022/07/28 20:16:39 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ int	print_string(int flag, int width, int precision, va_list *vl)
 	long long	len;
 
 	tmp = va_arg(*vl, char *);
+	if (!tmp)
+		tmp = "(null)";
 	len = ft_strlen(tmp);
 	if (flag & (1 << 6) && len > precision)
 		len = precision;
-	if (!tmp)
-		tmp = "(null)";
 	return (write_result((flag & 1 << 1) | (1 << 8), \
 	tmp, __max(len, width), len));
 }
