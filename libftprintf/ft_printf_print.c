@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 00:38:49 by tjo               #+#    #+#             */
-/*   Updated: 2022/07/28 19:06:17 by tjo              ###   ########.fr       */
+/*   Updated: 2022/07/28 19:27:39 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,15 @@ int	print_char(int flag, int width, va_list *vl)
 	return (write_result(flag & 1 << 1, tmp, __max(width, 1), 1));
 }
 
-int	print_string(int flag, int width, va_list *vl)
+int	print_string(int flag, int width, int precision, va_list *vl)
 {
 	char		*tmp;
 	long long	len;
 
 	tmp = va_arg(*vl, char *);
 	len = ft_strlen(tmp);
+	if (flag & (1 << 6) && len > precision)
+		len = precision;
 	if (!tmp)
 		tmp = "(null)";
 	return (write_result((flag & 1 << 1) | (1 << 8), \
@@ -70,15 +72,12 @@ int	print_dec(int flag, int width, int precision, va_list *vl)
 		number_len = get_length_ul(10, (unsigned int)num);
 	else
 		number_len = get_length(10, num);
-	// len = __max(number_len + mi, precision);
 	len = __max(number_len, precision);
 	tmp = (char *)malloc(sizeof(char) * len + 1);
 	if (flag & (1 << 7))
 		custom_atoi_udec(tmp, (unsigned int)len, num);
 	else
 		custom_atoi_dec(tmp, len, num);
-	// if (mi)
-	// 	tmp[len - number_len - 1] = '-';
 	return (write_result(flag | (mi << 9), tmp, __max(len, width), len));
 }
 

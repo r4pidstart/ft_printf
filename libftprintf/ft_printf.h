@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 21:55:51 by tjo               #+#    #+#             */
-/*   Updated: 2022/07/28 18:39:53 by tjo              ###   ########.fr       */
+/*   Updated: 2022/07/28 19:28:14 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		parse_precision(char **c, int *precision, va_list *vl, int *argu_len);
 
 /* ft_printf_print.c */
 int		print_char(int flag, int width, va_list *vl);
-int		print_string(int flag, int width, va_list *vl);
+int		print_string(int flag, int width, int precision, va_list *vl);
 int		print_pointer(int flag, int width, va_list *vl);
 int		print_dec(int flag, int width, int precision, va_list *vl);
 int		print_hex(int flag, int width, int precision, va_list *vl);

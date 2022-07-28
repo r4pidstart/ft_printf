@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 00:12:47 by tjo               #+#    #+#             */
-/*   Updated: 2022/07/28 17:39:17 by tjo              ###   ########.fr       */
+/*   Updated: 2022/07/28 19:23:38 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	parse_precision(char **c, int *precision, va_list *vl, int *argu_len)
 			(*c)++;
 			(*argu_len)++;
 		}
-		else
+		else if ('0' <= **c && **c <= '9')
 			*precision = ft_custom_atoi(c, argu_len);
 	}
 	return (ret);
