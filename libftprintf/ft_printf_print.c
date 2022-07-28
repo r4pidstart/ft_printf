@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 00:38:49 by tjo               #+#    #+#             */
-/*   Updated: 2022/07/28 19:27:39 by tjo              ###   ########.fr       */
+/*   Updated: 2022/07/28 19:39:48 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ int	print_hex(int flag, int width, int precision, va_list *vl)
 	unsigned int	num;
 
 	num = va_arg(*vl, unsigned int);
+	if (!num && flag | (1 << 3))
+		flag -= (1 << 3);
 	len = __max(get_length_ul(16, num), precision);
 	tmp = (char *)malloc(sizeof(char) * len + 1);
 	if (!tmp)
