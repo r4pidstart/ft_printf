@@ -1,56 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
+/*   ft_printf_utils1.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 01:12:41 by tjo               #+#    #+#             */
-/*   Updated: 2022/07/26 00:43:05 by tjo              ###   ########.fr       */
+/*   Updated: 2022/07/28 22:09:20 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"ft_printf.h"
 
-size_t	ft_strlen(const char *s)
-{
-	size_t	n;
-
-	n = 0;
-	while (s[n])
-		n++;
-	return (n);
-}
-
-int	__max(int a, int b)
-{
-	if (a > b)
-		return (a);
-	else
-		return (b);
-}
-
-int	get_length(int base, long long n)
-{
-	int			ret;
-
-	ret = 0;
-	if (n == 0)
-		return (1);
-	if (n < 0)
-	{
-		ret++;
-		n *= -1;
-	}
-	while (n)
-	{
-		ret++;
-		n /= base;
-	}
-	return (ret);
-}
-
-int	get_length_ul(int base, size_t n)
+int	get_length(int base, size_t n)
 {
 	int	ret;
 
@@ -104,7 +66,7 @@ void	custom_atoi_hex(int flag, char *tmp, int len, size_t num)
 			tmp[len] = '0';
 		else
 		{
-			if (num % 16 > 9 && flag & (1 << 7))
+			if (num % 16 > 9 && flag & ARG_CAPITAL)
 				tmp[len] = "ABCDEF"[num % 16 - 10];
 			else if (num % 16 > 9)
 				tmp[len] = "abcdef"[num % 16 - 10];

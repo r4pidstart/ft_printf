@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 21:55:51 by tjo               #+#    #+#             */
-/*   Updated: 2022/07/28 19:28:14 by tjo              ###   ########.fr       */
+/*   Updated: 2022/07/28 22:06:06 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,21 @@
 # include<stdarg.h>
 # include<unistd.h>
 # include<stdlib.h>
+
+enum e_args
+{
+	ARG_LJUSTIFY = 1 << 1,
+	ARG_ZEROFILL = 1 << 2,
+	ARG_SHARP = 1 << 3,
+	ARG_PLUS = 1 << 4,
+	ARG_SPACE = 1 << 5,
+	ARG_PRECISION = 1 << 6,
+	ARG_CAPITAL = 1 << 7,
+	ARG_UNSIGNED = 1 << 8,
+	FLAG_NEGATIVE = 1 << 9,
+	FLAG_STRING = 1 << 10
+};
+
 
 /* ft_printf_main.c */
 int		ft_printf(const char *str, ...);
@@ -32,14 +47,16 @@ int		print_pointer(int flag, int width, va_list *vl);
 int		print_dec(int flag, int width, int precision, va_list *vl);
 int		print_hex(int flag, int width, int precision, va_list *vl);
 
-/* ft_printf_utils.c */
-int		__max(int a, int b);
-size_t	ft_strlen(const char *s);
-int		get_length(int base, long long n);
-int		get_length_ul(int base, size_t n);
+/* ft_printf_utils1.c */
+int		get_length(int base, size_t n);
 void	custom_atoi_dec(char *tmp, int len, long long n);
 void	custom_atoi_udec(char *tmp, int len, unsigned int num);
 void	custom_atoi_hex(int flag, char *tmp, int len, size_t n);
+
+/* ft_printf_utils2.c */
+size_t	ft_strlen(const char *s);
+int		__max(int a, int b);
+int		__min(int a, int b);
 
 /* ft_printf_write.c */
 int		write_result(int flag, char *str, int width, int slen);

@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 00:12:47 by tjo               #+#    #+#             */
-/*   Updated: 2022/07/28 19:55:18 by tjo              ###   ########.fr       */
+/*   Updated: 2022/07/28 22:12:58 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	parse_precision(char **c, int *precision, va_list *vl, int *argu_len)
 
 	*precision = 0;
 	if (**c == '.')
-		ret = 1 << 6;
+		ret = ARG_PRECISION;
 	else
 		ret = 0;
 	if (ret)
@@ -65,9 +65,9 @@ int	parse_flag2(char **c, int *width, va_list *vl, int *argu_len)
 
 	*width = 0;
 	if (**c == '-')
-		ret = 1 << 1;
+		ret = ARG_LJUSTIFY;
 	else if (**c == '0')
-		ret = 1 << 2;
+		ret = ARG_ZEROFILL;
 	else
 		ret = 0;
 	if (ret)
@@ -91,11 +91,11 @@ int	parse_flag1(char **c, int *argu_len)
 	int	ret;
 
 	if (**c == '#')
-		ret = 1 << 3;
+		ret = ARG_SHARP;
 	else if (**c == '+')
-		ret = 1 << 4;
+		ret = ARG_PLUS;
 	else if (**c == ' ')
-		ret = 1 << 5;
+		ret = ARG_SPACE;
 	else
 		ret = 0;
 	if (ret)

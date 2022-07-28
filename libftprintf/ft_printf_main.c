@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 21:56:30 by tjo               #+#    #+#             */
-/*   Updated: 2022/07/28 19:55:16 by tjo              ###   ########.fr       */
+/*   Updated: 2022/07/28 22:06:35 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,27 @@ static int	parse_argument(char *c, va_list *vl, int *argu_len)
 	else if (*c == 'p')
 		return (print_pointer(flag, width, vl));
 	else if (*c == 'd' || *c == 'i' || *c == 'u')
-		return (print_dec(flag | (*c == 'u') << 7, width, precision, vl));
+		return (print_dec(flag | (*c == 'u') * ARG_UNSIGNED, \
+		width, precision, vl));
 	else if (*c == 'x' || *c == 'X')
-		return (print_hex(flag | (*c == 'X') << 7, width, precision, vl));
+		return (print_hex(flag | (*c == 'X') * ARG_CAPITAL, \
+		width, precision, vl));
 	else if (*c == '%')
 		return (write(1, "%", 1));
 	else
 		return (0);
+}
+
+static int	parse_string(char **cur, va_list *vl)
+{
+	int	argu_len;
+	int	ret;
+
+	ret = 0;
+	argu_len = 1;
+	ret = parse_argument(++(*cur), vl, &argu_len);
+	(*cur) += argu_len;
+	return (ret);
 }
 
 int	ft_printf(const char *str, ...)
@@ -45,7 +59,6 @@ int	ft_printf(const char *str, ...)
 	char	*cur;
 	int		ret;
 	int		cnt;
-	int		argu_len;
 
 	va_start(vl, str);
 	cnt = 0;
@@ -53,12 +66,7 @@ int	ft_printf(const char *str, ...)
 	while (*cur)
 	{
 		if (*cur == '%')
-		{
-			argu_len = 1;
-			ret = parse_argument(++cur, &vl, &argu_len);
-			cnt += ret;
-			cur += argu_len;
-		}
+			cnt += parse_string(&cur, &vl);
 		else
 		{
 			ret = write(1, cur++, 1);
