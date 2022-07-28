@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 21:56:30 by tjo               #+#    #+#             */
-/*   Updated: 2022/07/28 17:40:47 by tjo              ###   ########.fr       */
+/*   Updated: 2022/07/28 18:14:21 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	ft_printf(const char *str, ...)
 	{
 		if (*cur == '%')
 		{
+			argu_len = 1;
 			ret = parse_argument(++cur, &vl, &argu_len);
 			cnt += ret;
 			cur += argu_len;

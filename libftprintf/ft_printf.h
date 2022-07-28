@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 21:55:51 by tjo               #+#    #+#             */
-/*   Updated: 2022/07/28 17:34:13 by tjo              ###   ########.fr       */
+/*   Updated: 2022/07/28 18:39:53 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,6 @@ void	custom_atoi_udec(char *tmp, int len, unsigned int num);
 void	custom_atoi_hex(int flag, char *tmp, int len, size_t n);
 
 /* ft_printf_write.c */
-int		write_result(int flag, char *str, int width);
+int		write_result(int flag, char *str, int width, int slen);
 
 #endif
