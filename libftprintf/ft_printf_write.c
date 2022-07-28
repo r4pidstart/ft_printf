@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 00:53:23 by tjo               #+#    #+#             */
-/*   Updated: 2022/07/26 00:26:24 by tjo              ###   ########.fr       */
+/*   Updated: 2022/07/28 17:52:56 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static int	write_argument(int flag, char *str, int width)
 	return (ret);
 }
 
+// width를 여기서 처리함.
 int	write_result(int flag, char *str, int width)
 {
 	int			ret;
@@ -50,10 +51,9 @@ int	write_result(int flag, char *str, int width)
 	filler = ' ';
 	if (flag & (1 << 2))
 		filler = '0';
-	fill_size = 0;
-	// fill_size = width - ft_strlen(str);
-	// fill_size -= (2 * !!(flag & (1 << 3)));
-	// fill_size -= !!((flag & (1 << 4)) || (flag & (1 << 5)));
+	fill_size = width - ft_strlen(str);
+	fill_size -= (2 * !!(flag & (1 << 3)));
+	fill_size -= !!((flag & (1 << 4)) || (flag & (1 << 5)));
 	if (!(flag & (1 << 1)))
 	{
 		while (fill_size)
@@ -62,7 +62,7 @@ int	write_result(int flag, char *str, int width)
 			fill_size--;
 		}	
 	}
-	ret += write_argument(flag, str, width);
+	ret += write_argument(flag, str, ft_strlen(str));
 	while (fill_size--)
 		ret += write(1, &filler, 1);
 	if (!(flag & (1 << 8)))

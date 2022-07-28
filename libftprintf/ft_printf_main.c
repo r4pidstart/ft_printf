@@ -6,23 +6,23 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 21:56:30 by tjo               #+#    #+#             */
-/*   Updated: 2022/07/26 00:18:07 by tjo              ###   ########.fr       */
+/*   Updated: 2022/07/28 17:40:47 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"ft_printf.h"
 
 /* cspdiuxX% */
-static int	parse_argument(char *c, va_list *vl)
+static int	parse_argument(char *c, va_list *vl, int *argu_len)
 {
 	int	flag;
 	int	width;
 	int	precision;
 
 	flag = 0;
-	flag ^= parse_flag1(&c);
-	flag ^= parse_flag2(&c, &width, vl);
-	flag ^= parse_precision(&c, &precision, vl);
+	flag ^= parse_flag1(&c, argu_len);
+	flag ^= parse_flag2(&c, &width, vl, argu_len);
+	flag ^= parse_precision(&c, &precision, vl, argu_len);
 	if (*c == 'c')
 		return (print_char(flag, width, vl));
 	else if (*c == 's')
@@ -45,6 +45,7 @@ int	ft_printf(const char *str, ...)
 	char	*cur;
 	int		ret;
 	int		cnt;
+	int		argu_len;
 
 	va_start(vl, str);
 	cnt = 0;
@@ -53,9 +54,9 @@ int	ft_printf(const char *str, ...)
 	{
 		if (*cur == '%')
 		{
-			ret = parse_argument(++cur, &vl);
+			ret = parse_argument(++cur, &vl, &argu_len);
 			cnt += ret;
-			cur++;
+			cur += argu_len;
 		}
 		else
 		{

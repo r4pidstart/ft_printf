@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 00:38:49 by tjo               #+#    #+#             */
-/*   Updated: 2022/07/26 00:43:14 by tjo              ###   ########.fr       */
+/*   Updated: 2022/07/28 17:47:00 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ int	print_pointer(int flag, int width, va_list *vl)
 	size_t	num;
 
 	num = va_arg(*vl, size_t);
-	len = __max(get_length_ul(16, num), width);
+	len = get_length_ul(16, num);
 	tmp = (char *)malloc(sizeof(char) * len + 1);
 	if (!tmp)
 		return (0);
 	custom_atoi_hex(flag, tmp, len, num);
-	return (write_result((flag | (1 << 3)), tmp, len));
+	return (write_result((flag | (1 << 3)), tmp, width));
 }
 
 int	print_dec(int flag, int width, int precision, va_list *vl)
@@ -53,6 +53,7 @@ int	print_dec(int flag, int width, int precision, va_list *vl)
 	char		*tmp;
 	int			len;
 	int			mi;
+	int			number_len;
 	long long	num;
 
 	num = va_arg(*vl, int);
@@ -63,17 +64,18 @@ int	print_dec(int flag, int width, int precision, va_list *vl)
 		num = -num;
 	}
 	if (flag & (1 << 7))
-		len = __max(__max(get_length_ul(10, (unsigned int)num) + mi, precision), width);
+		number_len = get_length_ul(10, (unsigned int)num);
 	else
-		len = __max(__max(get_length(10, num) + mi, precision), width);
+		number_len = get_length(10, num);
+	len = __max(number_len + mi, precision);
 	tmp = (char *)malloc(sizeof(char) * len + 1 + mi);
 	if (flag & (1 << 7))
 		custom_atoi_udec(tmp, (unsigned int)len, num);
 	else
 		custom_atoi_dec(tmp, len, num);
 	if (mi)
-		tmp[0] = '-';
-	return (write_result(flag & (1 << 2), tmp, len));
+		tmp[len - number_len - 1] = '-';
+	return (write_result(flag, tmp, width));
 }
 
 int	print_hex(int flag, int width, int precision, va_list *vl)
@@ -83,10 +85,10 @@ int	print_hex(int flag, int width, int precision, va_list *vl)
 	unsigned int	num;
 
 	num = va_arg(*vl, unsigned int);
-	len = __max(__max(get_length_ul(16, num), width), precision);
+	len = __max(get_length_ul(16, num), precision);
 	tmp = (char *)malloc(sizeof(char) * len + 1);
 	if (!tmp)
 		return (0);
 	custom_atoi_hex(flag, tmp, len, num);
-	return (write_result(flag, tmp, len));
+	return (write_result(flag, tmp, width));
 }

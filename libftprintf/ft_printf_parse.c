@@ -6,13 +6,13 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 00:12:47 by tjo               #+#    #+#             */
-/*   Updated: 2022/07/25 22:37:16 by tjo              ###   ########.fr       */
+/*   Updated: 2022/07/28 17:39:17 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"ft_printf.h"
 
-static int	ft_custom_atoi(char **c)
+static int	ft_custom_atoi(char **c, int *argu_len)
 {
 	int			sign;
 	long long	ret;
@@ -26,11 +26,15 @@ static int	ft_custom_atoi(char **c)
 		(*c)++;
 	}
 	while ('0' <= **c && **c <= '9')
-		ret = ret * 10 + (*(*c++) - 0);
+	{
+		ret = ret * 10 + (**c) - '0';
+		(*c)++;
+		(*argu_len)++;
+	}
 	return (ret * sign);
 }
 
-int	parse_precision(char **c, int *precision, va_list *vl)
+int	parse_precision(char **c, int *precision, va_list *vl, int *argu_len)
 {
 	int	ret;
 
@@ -42,18 +46,20 @@ int	parse_precision(char **c, int *precision, va_list *vl)
 	if (ret)
 	{
 		(*c)++;
+		(*argu_len)++;
 		if (**c == '*')
 		{
 			*precision = va_arg(*vl, int);
 			(*c)++;
+			(*argu_len)++;
 		}
 		else
-			*precision = ft_custom_atoi(c);
+			*precision = ft_custom_atoi(c, argu_len);
 	}
 	return (ret);
 }
 
-int	parse_flag2(char **c, int *width, va_list *vl)
+int	parse_flag2(char **c, int *width, va_list *vl, int *argu_len)
 {
 	int	ret;
 
@@ -65,18 +71,22 @@ int	parse_flag2(char **c, int *width, va_list *vl)
 	else
 		ret = 0;
 	if (ret)
+	{
 		(*c)++;
+		(*argu_len)++;
+	}
 	if (**c == '*')
 	{
 		*width = va_arg(*vl, int);
 		(*c)++;
+		(*argu_len)++;
 	}
 	else
-		*width = ft_custom_atoi(c);
+		*width = ft_custom_atoi(c, argu_len);
 	return (ret);
 }
 
-int	parse_flag1(char **c)
+int	parse_flag1(char **c, int *argu_len)
 {
 	int	ret;
 
@@ -89,6 +99,9 @@ int	parse_flag1(char **c)
 	else
 		ret = 0;
 	if (ret)
+	{
 		(*c)++;
+		(*argu_len)++;
+	}
 	return (ret);
 }
