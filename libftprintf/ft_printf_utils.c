@@ -6,11 +6,29 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 01:12:41 by tjo               #+#    #+#             */
-/*   Updated: 2022/07/28 22:09:20 by tjo              ###   ########.fr       */
+/*   Updated: 2022/07/28 23:07:28 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"ft_printf.h"
+
+size_t	ft_strlen(const char *s)
+{
+	size_t	n;
+
+	n = 0;
+	while (s[n])
+		n++;
+	return (n);
+}
+
+int	__max(int a, int b)
+{
+	if (a > b)
+		return (a);
+	else
+		return (b);
+}
 
 int	get_length(int base, size_t n)
 {
@@ -25,21 +43,6 @@ int	get_length(int base, size_t n)
 		n /= base;
 	}
 	return (ret);
-}
-
-void	custom_atoi_dec(char *tmp, int len, long long num)
-{
-	tmp[len] = '\0';
-	while (len--)
-	{
-		if (!num)
-			tmp[len] = '0';
-		else
-		{
-			tmp[len] = num % 10 + '0';
-			num /= 10;
-		}
-	}
 }
 
 void	custom_atoi_udec(char *tmp, int len, unsigned int num)

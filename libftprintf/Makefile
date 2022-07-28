@@ -6,14 +6,14 @@
 #    By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/06 02:46:38 by tjo               #+#    #+#              #
-#    Updated: 2022/07/28 22:50:59 by tjo              ###   ########.fr        #
+#    Updated: 2022/07/28 23:08:07 by tjo              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = ft_printf_main.c ft_printf_parse.c ft_printf_print.c ft_printf_utils1.c ft_printf_utils2.c ft_printf_write.c
+SRCS = ft_printf_main.c ft_printf_parse.c ft_printf_print.c ft_printf_utils.c ft_printf_write.c
 
 all: $(NAME)
 

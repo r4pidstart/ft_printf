@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 21:55:51 by tjo               #+#    #+#             */
-/*   Updated: 2022/07/28 22:06:06 by tjo              ###   ########.fr       */
+/*   Updated: 2022/07/28 23:07:52 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ enum e_args
 	FLAG_STRING = 1 << 10
 };
 
-
 /* ft_printf_main.c */
 int		ft_printf(const char *str, ...);
 
@@ -47,16 +46,12 @@ int		print_pointer(int flag, int width, va_list *vl);
 int		print_dec(int flag, int width, int precision, va_list *vl);
 int		print_hex(int flag, int width, int precision, va_list *vl);
 
-/* ft_printf_utils1.c */
-int		get_length(int base, size_t n);
-void	custom_atoi_dec(char *tmp, int len, long long n);
-void	custom_atoi_udec(char *tmp, int len, unsigned int num);
-void	custom_atoi_hex(int flag, char *tmp, int len, size_t n);
-
-/* ft_printf_utils2.c */
+/* ft_printf_utils.c */
 size_t	ft_strlen(const char *s);
 int		__max(int a, int b);
-int		__min(int a, int b);
+int		get_length(int base, size_t n);
+void	custom_atoi_udec(char *tmp, int len, unsigned int num);
+void	custom_atoi_hex(int flag, char *tmp, int len, size_t n);
 
 /* ft_printf_write.c */
 int		write_result(int flag, char *str, int width, int slen);
