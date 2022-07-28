@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 00:53:23 by tjo               #+#    #+#             */
-/*   Updated: 2022/07/28 22:31:58 by tjo              ###   ########.fr       */
+/*   Updated: 2022/07/28 22:43:00 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ int	write_result(int flag, char *str, int width, int slen)
 		}
 	}
 	while (!(flag & ARG_LJUSTIFY) && fill_size)
-		fill_size -= write(1, &filler, fill_size);
+		fill_size -= write(1, &filler, 1);
 	ret += write_argument(flag, str, slen);
 	while (fill_size)
-		fill_size -= write(1, &filler, fill_size);
+		fill_size -= write(1, &filler, 1);
 	if (!(flag & FLAG_STRING))
 		free(str);
 	return (ret);
