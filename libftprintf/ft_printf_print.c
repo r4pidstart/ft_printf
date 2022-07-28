@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 00:38:49 by tjo               #+#    #+#             */
-/*   Updated: 2022/07/28 19:39:48 by tjo              ###   ########.fr       */
+/*   Updated: 2022/07/28 19:43:55 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ int	print_dec(int flag, int width, int precision, va_list *vl)
 		mi = 1;
 		num = -num;
 	}
+	if (mi && flag | (1 << 5))
+		flag -= (1 << 5);
 	if (flag & (1 << 7))
 		number_len = get_length_ul(10, (unsigned int)num);
 	else
