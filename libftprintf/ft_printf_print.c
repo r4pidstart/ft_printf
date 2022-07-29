@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 00:38:49 by tjo               #+#    #+#             */
-/*   Updated: 2022/07/29 23:10:28 by tjo              ###   ########.fr       */
+/*   Updated: 2022/07/29 23:27:36 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ int	print_dec(int flag, int width, int precision, va_list *vl)
 		num = -num;
 		flag &= ~(ARG_PLUS | ARG_SPACE);
 	}
+	if (flag & ARG_ZEROFILL && flag & ARG_PRECISION)
+		flag &= ~ARG_ZEROFILL;
 	len = __max(get_length(10, (unsigned int)num), precision);
 	tmp = (char *)malloc(sizeof(char) * len + 1);
 	if (!tmp)
@@ -91,6 +93,8 @@ int	print_hex(int flag, int width, int precision, va_list *vl)
 		return (0);
 	if (!num && flag & ARG_SHARP)
 		flag -= ARG_SHARP;
+	if (flag & ARG_ZEROFILL && flag & ARG_PRECISION)
+		flag &= ~ARG_ZEROFILL;
 	len = __max(get_length(16, num), precision);
 	tmp = (char *)malloc(sizeof(char) * len + 1);
 	if (!tmp)
