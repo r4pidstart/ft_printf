@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 00:38:49 by tjo               #+#    #+#             */
-/*   Updated: 2022/07/28 23:08:11 by tjo              ###   ########.fr       */
+/*   Updated: 2022/07/29 23:10:28 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ int	print_dec(int flag, int width, int precision, va_list *vl)
 	long long	num;
 
 	num = va_arg(*vl, int);
+	if (flag & ARG_PRECISION && !precision && !num)
+		return (0);
 	mi = 0;
 	if (!(flag & ARG_UNSIGNED) && num < 0)
 	{
@@ -85,6 +87,8 @@ int	print_hex(int flag, int width, int precision, va_list *vl)
 	unsigned int	num;
 
 	num = va_arg(*vl, unsigned int);
+	if (flag & ARG_PRECISION && !precision && !num)
+		return (0);
 	if (!num && flag & ARG_SHARP)
 		flag -= ARG_SHARP;
 	len = __max(get_length(16, num), precision);
