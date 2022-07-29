@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 00:38:49 by tjo               #+#    #+#             */
-/*   Updated: 2022/07/29 23:27:36 by tjo              ###   ########.fr       */
+/*   Updated: 2022/07/29 23:33:28 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,6 @@ int	print_dec(int flag, int width, int precision, va_list *vl)
 	long long	num;
 
 	num = va_arg(*vl, int);
-	if (flag & ARG_PRECISION && !precision && !num)
-		return (0);
 	mi = 0;
 	if (!(flag & ARG_UNSIGNED) && num < 0)
 	{
@@ -74,6 +72,8 @@ int	print_dec(int flag, int width, int precision, va_list *vl)
 	if (flag & ARG_ZEROFILL && flag & ARG_PRECISION)
 		flag &= ~ARG_ZEROFILL;
 	len = __max(get_length(10, (unsigned int)num), precision);
+	if (flag & ARG_PRECISION && !precision && !num)
+		len = 0;
 	tmp = (char *)malloc(sizeof(char) * len + 1);
 	if (!tmp)
 		return (0);
@@ -89,13 +89,13 @@ int	print_hex(int flag, int width, int precision, va_list *vl)
 	unsigned int	num;
 
 	num = va_arg(*vl, unsigned int);
-	if (flag & ARG_PRECISION && !precision && !num)
-		return (0);
 	if (!num && flag & ARG_SHARP)
 		flag -= ARG_SHARP;
 	if (flag & ARG_ZEROFILL && flag & ARG_PRECISION)
 		flag &= ~ARG_ZEROFILL;
 	len = __max(get_length(16, num), precision);
+	if (flag & ARG_PRECISION && !precision && !num)
+		len = 0;
 	tmp = (char *)malloc(sizeof(char) * len + 1);
 	if (!tmp)
 		return (0);
