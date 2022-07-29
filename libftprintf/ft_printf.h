@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 21:55:51 by tjo               #+#    #+#             */
-/*   Updated: 2022/07/28 23:07:52 by tjo              ###   ########.fr       */
+/*   Updated: 2022/07/29 00:32:01 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include<unistd.h>
 # include<stdlib.h>
 
-enum e_args
+enum	e_args
 {
 	ARG_LJUSTIFY = 1 << 1,
 	ARG_ZEROFILL = 1 << 2,
