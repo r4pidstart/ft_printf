@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 21:56:30 by tjo               #+#    #+#             */
-/*   Updated: 2022/07/30 02:01:28 by tjo              ###   ########.fr       */
+/*   Updated: 2022/07/30 02:59:39 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@ static int	parse_argument(char *c, va_list *vl, int *argu_len)
 	int	precision;
 
 	flag = 0;
-	flag ^= parse_flag1(&c, argu_len);
-	flag ^= parse_flag2(&c, &width, vl, argu_len);
-	flag ^= parse_precision(&c, &precision, vl, argu_len);
+	while (*c == '#' || *c == '+' || *c == ' ')
+		flag |= parse_flag1(&c, argu_len);
+	flag |= parse_flag2(&c, &width, vl, argu_len);
+	flag |= parse_precision(&c, &precision, vl, argu_len);
 	if (*c == 'c')
 		return (print_char(flag, width, vl));
 	else if (*c == 's')

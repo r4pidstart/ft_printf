@@ -7,7 +7,14 @@
 	"utils.h": "c",
 	"locale": "cpp",
 	"istream": "c",
-	"ft_printf.h": "c"
+	"ft_printf.h": "c",
+	"stdio.h": "c",
+	"ios": "c",
+	"limits": "c",
+	"new": "c",
+	"type_traits": "c",
+	"ratio": "c",
+	"ft_printf_bonus.h": "c"
 },
     "editor.insertSpaces": false,
 	"editor.detectIndentation": false,
