@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_printf_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 21:55:51 by tjo               #+#    #+#             */
-/*   Updated: 2022/07/30 00:06:29 by tjo              ###   ########.fr       */
+/*   Updated: 2022/07/30 02:01:53 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#ifndef FT_PRINTF_BONUS_H
+# define FT_PRINTF_BONUS_H
 
 # include<stdarg.h>
 # include<unistd.h>
