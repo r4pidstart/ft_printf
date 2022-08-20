@@ -474,4 +474,6 @@ static int	write_argument(int flag, char *str, int width)
 - - -
 </details>
 
+<img width="832" alt="스크린샷 2022-08-20 오후 5 05 25" src="https://user-images.githubusercontent.com/67845112/185735529-42cd67ad-83bd-4915-8834-05ccc3a13515.png">
+
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fr4pidstart%2Fft_printf&count_bg=%23000000&title_bg=%23000000&icon=&icon_color=%23000000&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
